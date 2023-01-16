@@ -10,6 +10,7 @@ import "strings"
 
 type Error struct {
 	Message string
+	Status string
 }
 
 func DecodeRequestBody(req *http.Request) []byte {
@@ -61,10 +62,22 @@ func checkBearerToken(header interface{}) bool {
 }
 
 
-func CheckError(err error) {
+func makeRequest (method string, url string, body io.Reader) *http.Response {
+		 req, err := http.NewRequest(method, url, bytes.NewBuffer(body))
+	         CheckError(err, "Wrong " + method + " request")
+		
+		 client := http.Client{
+			Timeout: 30 * time.Second,
+		}
+		res, err := client.Do(req)
+	        CheckError(err, method + " Response error: ")
+}		return res
+
+
+func CheckError(err error, message string) {
 		
   if err != nil {
-		fmt.Println(err)
+	  fmt.Println(message + err.Error())
 	}
 }
 
