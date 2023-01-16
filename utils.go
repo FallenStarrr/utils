@@ -4,7 +4,6 @@ import "net/http"
 import "io/ioutil"
 import "fmt"
 import "strings"
-import "io"
 import "bytes"
 import (
 	"time"
@@ -74,7 +73,8 @@ func makeRequest (method string, url string, body []byte) *http.Response {
 		}
 		res, err := client.Do(req)
 	        CheckError(err, method + " Response error: ")
-}		return res
+                return res
+}		
 
 
 func CheckError(err error, message string) {
