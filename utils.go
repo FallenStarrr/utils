@@ -41,9 +41,9 @@ func checkBearerToken(header interface{}) bool {
 	
 	switch v :=  header.(type)  {
 		case http.Request:
-		auth["request"] = header.(http.Request).Header.Get("Authorization")
+		auth["request"] = header.(v).Header.Get("Authorization")
 		case *http.Response:
-		auth["response"] = header.(*http.Response).Header.Get("Authorization")
+		auth["response"] = header.(v).Header.Get("Authorization")
 	}
 	if auth["request"].(string) != "" {
 		authHead = auth["request"].(string)
@@ -65,7 +65,7 @@ func checkBearerToken(header interface{}) bool {
 }
 
 
-func makeRequest (method string, url string, body io.Reader) *http.Response {
+func makeRequest (method string, url string, body []byte) *http.Response {
 		 req, err := http.NewRequest(method, url, bytes.NewBuffer(body))
 	         CheckError(err, "Wrong " + method + " request")
 		
