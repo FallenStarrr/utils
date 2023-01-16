@@ -33,7 +33,7 @@ func DecodeResponseBody(res *http.Response) []byte {
 	return body
 }
 
-func checkBearerToken(header interface{}) bool {
+func CheckBearerToken(header interface{}) bool {
 	
 	var authHead string
 	auth := map[string]interface{}{}
@@ -64,7 +64,7 @@ func checkBearerToken(header interface{}) bool {
 }
 
 
-func makeRequest (method string, url string, body []byte) *http.Response {
+func MakeRequest (method string, url string, body []byte) *http.Response {
 		 req, err := http.NewRequest(method, url, bytes.NewBuffer(body))
 	         CheckError(err, "Wrong " + method + " request")
 		
