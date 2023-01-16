@@ -13,7 +13,7 @@ type Error struct {
 }
 
 func DecodeRequestBody(req *http.Request) []byte {
-				
+		defer req.Body.Close()		
 		body, err   := ioutil.ReadAll(req.Body)
 		if err != nil {
 			fmt.Println(err)
@@ -22,7 +22,7 @@ func DecodeRequestBody(req *http.Request) []byte {
 }
 
 func DecodeResponseBody(res *http.Response) []byte {
-				
+	defer res.Body.Close()			
 	body, err   := ioutil.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
