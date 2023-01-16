@@ -38,6 +38,6 @@ func CheckError(err error) {
 	}
 }
 
-func StringBytes(bytes []byte) string {
+func s(bytes []byte) string {
 	return string(bytes)
 }
