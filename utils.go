@@ -37,3 +37,7 @@ func CheckError(err error) {
 		fmt.Println(err)
 	}
 }
+
+func StringBytes(bytes []byte) string {
+	return string(bytes)
+}
