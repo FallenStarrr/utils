@@ -37,13 +37,13 @@ func DecodeResponseBody(res *http.Response) []byte {
 func checkBearerToken(header interface{}) bool {
 	
 	var authHead string
-	auth := map[string]interface{}
+	auth := map[string]interface{}{}
 	
-	switch v :=  header.(type)  {
+	switch  header.(type)  {
 		case http.Request:
-		auth["request"] = header.(v).Header.Get("Authorization")
+		auth["request"] = header.(http.Request).Header.Get("Authorization")
 		case *http.Response:
-		auth["response"] = header.(v).Header.Get("Authorization")
+		auth["response"] = header.(*http.Response).Header.Get("Authorization")
 	}
 	if auth["request"].(string) != "" {
 		authHead = auth["request"].(string)
