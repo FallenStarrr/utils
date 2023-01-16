@@ -4,8 +4,11 @@ import "net/http"
 import "io/ioutil"
 import "fmt"
 import "strings"
-
-
+import "io"
+import "bytes"
+import (
+	"time"
+)
 
 
 type Error struct {
@@ -36,7 +39,7 @@ func checkBearerToken(header interface{}) bool {
 	var authHead string
 	auth := map[string]interface{}
 	
-	switch(header.(type)) {
+	switch v :=  header.(type)  {
 		case http.Request:
 		auth["request"] = header.(http.Request).Header.Get("Authorization")
 		case *http.Response:
